@@ -1,10 +1,9 @@
 package main
 
 import (
-	// "backend/db"
-
 	"backend/db"
 	"backend/handlers"
+	"backend/middleware"
 	"backend/repository"
 	"backend/services"
 
@@ -15,18 +14,23 @@ func main() {
 
 	server := gin.Default()
 
-	//init db
+	// Middleware
+	server.Use(middleware.CORSMiddleware())
+
+	// Init DB
 	dbConnection, err := db.ConnectDB()
 	if err != nil {
 		panic(err)
 	}
 
-	//repositories
+	// Repositories
 	TaskRepository := repository.NewTaskRepository(dbConnection)
-	//services (usecases)
+	// Services (usecases)
 	TaskService := services.NewTaskService(TaskRepository)
 
-	//handlers (controller)
+	// Handlers (controllers)
+
+	// Endpoints
 	taskHandler := handlers.NewTaskHandler(TaskService)
 
 	server.GET("/ping", func(ctx *gin.Context) {
@@ -37,5 +41,13 @@ func main() {
 
 	server.GET("/tasks", taskHandler.GetTasks)
 
-	server.Run(":8000")
+	server.GET("/tasks/:taskId", taskHandler.GetTaskById)
+
+	server.POST("/tasks", taskHandler.CreateTask)
+
+	server.PUT("/tasks/:taskId", taskHandler.UpdateTask)
+
+	server.DELETE("/tasks/:taskId", taskHandler.DeleteTaskById)
+
+	server.Run(":8080")
 }

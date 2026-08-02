@@ -3,31 +3,32 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-const (
-	host     = "localhost"
-	port     = 3306
-	user     = "user"
-	password = "mysecret"
-	dbname   = "VeritasDb"
-)
-
 func ConnectDB() (*sql.DB, error) {
-	mysqlInfo := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?parseTime=true",
-		user, password, host, port, dbname)
 
-	db, err := sql.Open("mysql", mysqlInfo)
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbname := os.Getenv("DB_NAME")
+
+	dsn := fmt.Sprintf(
+		"%s:%s@tcp(%s:%s)/%s?parseTime=true",
+		user,
+		password,
+		host,
+		port,
+		dbname,
+	)
+
+	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := db.Ping(); err != nil {
-		return nil, err
-	}
-
-	fmt.Println("Connected to", dbname)
 	return db, nil
 }
