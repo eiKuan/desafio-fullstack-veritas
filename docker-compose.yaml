@@ -1,0 +1,58 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/db:/app/db
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: VeritasDb
+      DB_USER: user
+      DB_PASSWORD: mysecret
+
+  mysql:
+    image: mysql:8.4
+    container_name: Desafio_Veritas
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecret
+      MYSQL_DATABASE: VeritasDb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: mysecret
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  dbgate:
+    image: dbgate/dbgate:latest
+    container_name: dbgate
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - "3000:3000"
+    volumes:
+      - dbgate_data:/root/.dbgate
+
+volumes:
+  mysql_data:
+  dbgate_data:
+
+# frontend:
+#   build:
+#     context: ./frontend
+#
+#   container_name: frontend
+#
+#   ports:
+#     - "5173:5173"
+#
+#   depends_on:
+#     - backend
