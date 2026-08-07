@@ -17,13 +17,13 @@ Este **Mini Kanban** é uma aplicação fullstack de organização de tarefas em
 
 ## <img src="https://github.com/user-attachments/assets/ee2c5fe1-2dc2-44e6-a71d-19c38ae9958e" width="20" height="20"/> Sumário
 
-- [Visão geral do projeto](#-visão-geral-do-projeto)
-- [Funcionalidades](funcionalidades)
-- [Tecnologias](tecnologias)
-- [Arquitetura do projeto e Estrutura](arquitetura-e-estrutura)
-- [Como inicializar o projeto](inicializar)
-- [Documentação](documentação)
-- [Limitações e melhorias futuras](limitacoes)
+- [Visão geral do projeto](#visão-geral-do-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Arquitetura do projeto e Estrutura](#arquitetura-e-estrutura)
+- [Como inicializar o projeto](#inicializar)
+- [Documentação](#documentação)
+- [Limitações e melhorias futuras](#limitacoes)
 
 ---
 <h1 id="funcionalidades" align="center"> 
