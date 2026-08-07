@@ -1,0 +1,59 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "${BACKEND_PORT}:8080"
+    volumes:
+      - ./backend/db:/app/db
+      - ./backend/storage:/app/storage
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN}
+
+  mysql:
+    image: mysql:8.4
+    container_name: ${MYSQL_CONTAINER_NAME}
+    restart: unless-stopped
+    ports:
+      - "${MYSQL_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  dbgate:
+    image: dbgate/dbgate:latest
+    container_name: ${DBGATE_CONTAINER_NAME}
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - "${DBGATE_PORT}:3000"
+    volumes:
+      - dbgate_data:/root/.dbgate
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "${FRONTEND_PORT}:5173"
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:${BACKEND_PORT}
+
+volumes:
+  mysql_data:
+  dbgate_data:
