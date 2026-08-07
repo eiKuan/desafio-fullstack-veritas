@@ -22,7 +22,7 @@ Este **Mini Kanban** é uma aplicação fullstack de organização de tarefas em
 - [Tecnologias](#tecnologias)
 - [Arquitetura do projeto e Estrutura](#arquitetura-e-estrutura)
 - [Como inicializar o projeto](#inicializar)
-- [Documentação](#documentação)
+- [Documentação](#documentacao)
 - [Limitações e melhorias futuras](#limitacoes)
 
 ---
