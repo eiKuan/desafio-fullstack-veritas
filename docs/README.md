@@ -11,7 +11,7 @@
 
 Este **Mini Kanban** é uma aplicação fullstack de organização de tarefas em colunas estilo Kanban (A fazer, Em andamento e Finalizado), com cartões arrastáveis (drag and drop) e um mascote reativo que reage à interação do usuário. O backend expõe uma API REST em Go sobre MySQL e persiste as tarefas, o frontend consome essa API e renderiza o board, os cards e o mascote. Tudo é containerizado em Docker. O projeto foi desenvolvido como desafio técnico da [Veritas](https://www.veritas.law/).
 
-> Observação 1: Também existe uma persistência por JSONs em backend/storage (é criado após qualquer inserção de dados na aplicação).
+> Observação 1: Também existe uma persistência por JSONs em backend/storage (é criado após qualquer inserção de dados na aplicação). <br>
 > Observação 2: Todos os commits do repositório foram sobrescritos por conta de um git push --force 👍
 ---
 
