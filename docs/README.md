@@ -11,21 +11,27 @@
 
 Este **Mini Kanban** é uma aplicação fullstack de organização de tarefas em colunas estilo Kanban (A fazer, Em andamento e Finalizado), com cartões arrastáveis (drag and drop) e um mascote reativo que reage à interação do usuário. O backend expõe uma API REST em Go sobre MySQL e persiste as tarefas, o frontend consome essa API e renderiza o board, os cards e o mascote. Tudo é containerizado em Docker. O projeto foi desenvolvido como desafio técnico da [Veritas](https://www.veritas.law/).
 
-> Observação: Também existe uma persistência por JSONs em backend/storage (é criado após qualquer inserção de dados na aplicação).
+> Observação 1: Também existe uma persistência por JSONs em backend/storage (é criado após qualquer inserção de dados na aplicação). <br>
+> Observação 2: Todos os commits do repositório foram sobrescritos por conta de um git push --force 👍
 ---
 
 ## <img src="https://github.com/user-attachments/assets/ee2c5fe1-2dc2-44e6-a71d-19c38ae9958e" width="20" height="20"/> Sumário
 
-- [Visão geral do projeto](#-visão-geral-do-projeto)
-- [Funcionalidades](#-funcionalidades)
-- [Tecnologias](-tecnologias)
-- [Arquitetura do projeto e Estrutura](-arquitetura-do-projeto-e-estrutura)
-- [Como inicializar o projeto](-como-inicializar-o-projeto)
-- [Documentação](-documentação)
+- [Visão geral do projeto](#visão-geral-do-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Arquitetura do projeto e Estrutura](#arquitetura-e-estrutura)
+- [Como inicializar o projeto](#inicializar)
+- [Documentação](#documentacao)
+- [Limitações e melhorias futuras](#limitacoes)
 
 ---
-
-## <img src="https://github.com/user-attachments/assets/6a1fda23-dba1-4e2d-9d19-639d57aee1b7" width="25" height="25" /> Funcionalidades
+<h1 id="funcionalidades" align="center"> 
+  <img src="https://github.com/user-attachments/assets/6a1fda23-dba1-4e2d-9d19-639d57aee1b7" width="25" height="25"/> Funcionalidades
+</h1>
+<p align="center">
+  <img src="https://github.com/eiKuan/desafio-fullstack-veritas/blob/main/docs/gitImages/readmeVideoReSS.webp"/>
+</p>
 
 - **CRUD completo de tarefas**, com rotas `GET`, `POST`, `PUT` e `DELETE` em `/tasks`
 - **Drag and drop** para mover tarefas entre colunas
@@ -34,15 +40,11 @@ Este **Mini Kanban** é uma aplicação fullstack de organização de tarefas em
 - **Reordenação automática** das posições das tarefas ao mover entre colunas
 - **Indicadores visuais** de prioridade (Baixa, Média, Alta) e de dias restantes até a data limite
 
-> Observação 1: Somente o título é obrigatório na criação de novas tarefas.
-### =================
-### =================
-### =================
-### =================
-### =================
+> Observação: Somente o título é obrigatório na criação de novas tarefas.
+
 ---
 
-<h1 align="center"> 
+<h1 id="tecnologias" align="center"> 
   <img src="https://github.com/user-attachments/assets/c4feddda-98c3-40f8-8183-8605bd194c82" width="25" height="25"/> Tecnologias
   </h1>
 
@@ -88,7 +90,7 @@ Outras bibliotecas completam o frontend:
   - **React Router DOM** — roteamento das páginas.
 
 ---
-<h2 align="center"> 
+<h2 id="arquitetura-e-estrutura" align="center"> 
   <img src="https://github.com/user-attachments/assets/c5bc9026-a82f-4718-a24c-0d1139616a18" width="25" height="25"/> Arquitetura do projeto e Estrutura
 </h2>
 
@@ -158,7 +160,7 @@ desafio-fullstack-veritas/
 
 ---
 
-<h2 align="center"> 
+<h2 id="inicializar" align="center"> 
   <img src="https://github.com/user-attachments/assets/eae933f5-1ca8-4a2f-a99f-6344dbfbd465" width="25" height="25"/> Como inicializar o projeto
 </h2>
 
@@ -226,7 +228,7 @@ npm run dev
 
 ---
 
-<h1 align="center"> 
+<h1 id="documentacao" align="center"> 
   <img src="https://github.com/user-attachments/assets/0d3922bb-7f46-4758-aa12-41875b326126" width="25" height="25"/> Documentação 
 </h1>
 <p align="center">
@@ -238,11 +240,11 @@ npm run dev
 
 ---
 
-<h1 align="center"> 
+<h1 id="limitacoes" align="center"> 
   <img src="https://github.com/user-attachments/assets/fcd0257f-87dd-4d3f-92f2-f337dce0ed29" width="25" height="25"/> Limitações conhecidas e melhorias futuras 
 </h1>
 <p align="center">
-  <img src="https://github.com/eiKuan/desafio-fullstack-veritas/blob/main/docs/gitImages/limitEmelhor.png"/>
+  <img src="https://github.com/eiKuan/desafio-fullstack-veritas/blob/main/docs/gitImages/limitEmelhor.png" width="400" height="500"/>
 </p>
 
 ### <img src="https://github.com/user-attachments/assets/bc57f1e6-2b5e-455c-830e-20ce8b204b5d" width="20" height="20"/> Limitações conhecidas
