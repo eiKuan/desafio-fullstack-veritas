@@ -17,7 +17,7 @@ Este **Mini Kanban** é uma aplicação fullstack de organização de tarefas em
 
 ## <img src="https://github.com/user-attachments/assets/ee2c5fe1-2dc2-44e6-a71d-19c38ae9958e" width="20" height="20"/> Sumário
 
-- [Visão geral do projeto](#visão-geral-do-projeto)
+- [Visão geral do projeto](#-visão-geral-do-projeto)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias](#tecnologias)
 - [Arquitetura do projeto e Estrutura](#arquitetura-e-estrutura)
@@ -40,7 +40,8 @@ Este **Mini Kanban** é uma aplicação fullstack de organização de tarefas em
 - **Reordenação automática** das posições das tarefas ao mover entre colunas
 - **Indicadores visuais** de prioridade (Baixa, Média, Alta) e de dias restantes até a data limite
 
-> Observação: Somente o título é obrigatório na criação de novas tarefas.
+> Observação: Somente o título é obrigatório na criação de novas tarefas; <br>
+> A Edição das tarefas é feita através de duplo click nos cards
 
 ---
 
@@ -236,7 +237,7 @@ npm run dev
 </p>
 
 - **Userflow**: [docs/flows/userFlow.png](./flows/userFlow.png)
-- **Dataflow ( DFD Level 0/1 )**: [docs/flows/dataflow.png](./flows/dataFlow.png)
+- **Dataflow ( DFD Level 0/1 )**: [docs/flows/dataflow.png](./flows/dataflow.png)
 
 ---
 
