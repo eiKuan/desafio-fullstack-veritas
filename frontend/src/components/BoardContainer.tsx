@@ -50,23 +50,37 @@ export default function BoardContainer() {
 
   // toPosition is 0-indexed (matches CardList's dragOverTarget.position).
   function handleMoveTask(taskId: number, toColumn: number, toPosition: number) {
+    console.log("[HANDLE_MOVE_TASK] start: taskId=", taskId, "toColumn=", toColumn, "toPosition=", toPosition);
     const task = tasks?.find((t) => t.id === taskId);
-    if (!task) return;
+    if (!task) {
+      console.log("[HANDLE_MOVE_TASK] task not found!");
+      return;
+    }
 
     const columnTasks = (tasks ?? [])
       .filter((t) => t.column_type === toColumn && t.id !== taskId)
       .sort((a, b) => a.column_position - b.column_position);
 
     const clampedPos = Math.max(0, Math.min(toPosition, columnTasks.length));
+    console.log("[HANDLE_MOVE_TASK] columnTasks before splice:", columnTasks.map(t => `${t.id}(pos${t.column_position})`));
+    console.log("[HANDLE_MOVE_TASK] clampedPos=", clampedPos);
 
     // Insert the moved task into the ordered list so siblings' new
     // 1-indexed positions can be computed relative to it, then update
     // it separately below.
     columnTasks.splice(clampedPos, 0, { ...task, column_type: toColumn });
+    console.log("[HANDLE_MOVE_TASK] columnTasks after splice:", columnTasks.map(t => `${t.id}(pos${t.column_position})`));
 
     columnTasks.forEach((t, idx) => {
-      if (t.id === taskId) return;
-      if (t.column_position === idx + 1) return; // position unchanged, skip write
+      if (t.id === taskId) {
+        console.log(`[HANDLE_MOVE_TASK] skipping moved task at idx=${idx}`);
+        return;
+      }
+      if (t.column_position === idx + 1) {
+        console.log(`[HANDLE_MOVE_TASK] skipping task ${t.id} at idx=${idx}: pos already ${t.column_position}`);
+        return; // position unchanged, skip write
+      }
+      console.log(`[HANDLE_MOVE_TASK] updating task ${t.id}: old_pos=${t.column_position}, new_pos=${idx + 1}`);
       updateTask.mutate({
         id: t.id,
         dto: {
@@ -83,6 +97,7 @@ export default function BoardContainer() {
     });
 
     const newPos = clampedPos + 1;
+    console.log(`[HANDLE_MOVE_TASK] updating moved task ${taskId}: new_pos=${newPos}`);
     const updated: UpdateTaskDTO = {
       title: task.title,
       description: task.description,

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import kanbanFrame from "../assets/kanbanFrame.png";
-import { COLUMN_TYPE } from "../utils/task";
+import { COLUMN_TYPE, sortTasksByPosition } from "../utils/task";
 import { useDragDrop, type DragDropTarget } from "../contexts/DragDropContext";
 import type { Task } from "../types";
 import CardList from "./CardList";
@@ -44,7 +44,9 @@ export default function KanbanBoard({
           <Column
             key={col.type}
             columnType={col.type}
-            tasks={tasks.filter((t) => t.column_type === col.type)}
+            tasks={tasks
+              .filter((t) => t.column_type === col.type)
+              .sort(sortTasksByPosition)}
             onMoveTask={onMoveTask}
             onDeleteTask={onDeleteTask}
             onEditTask={onEditTask}
@@ -194,13 +196,17 @@ function Column({
       }}
       onDrop={(e) => {
         e.preventDefault();
+        console.log("[DROP] fired. draggingTask=", draggingTask, "dragOverTarget=", dragOverTarget, "columnType=", columnType);
         if (draggingTask) {
           const dropIndex =
             dragOverTarget?.type === "column" && dragOverTarget.columnType === columnType
               ? dragOverTarget.position ??
                 computeDropIndex(e.clientY, listRef.current, draggingTask.id, tasks)
               : computeDropIndex(e.clientY, listRef.current, draggingTask.id, tasks);
+          console.log("[DROP] calling onMoveTask:", draggingTask.id, columnType, dropIndex);
           onMoveTask(draggingTask.id, columnType, dropIndex);
+        } else {
+          console.log("[DROP] draggingTask is NULL — onMoveTask NOT called");
         }
         setDragOverTarget(null);
         setDraggingTask(null);
